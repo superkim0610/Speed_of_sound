@@ -26,6 +26,7 @@ print(x.head());print(y.head())
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=42)
 print(x_train)
+print(y_train)
 
 model = LinearRegression()
 model.fit(x_train, y_train)
@@ -33,5 +34,10 @@ model.fit(x_train, y_train)
 print("가중치(계수, 기울기 파라미터 W) :", model.coef_)
 print("편향(절편 파라미터 b) :", model.intercept_)
 
-print("훈련세트 점수: {:.2f}".format( model.score(x_train, y_train) ))
-print("테스트세트 점수: {:.2f}".format( model.score(x_test, y_test) ))
+print(model.score(x_train, y_train))
+print(model.score(x_test, y_test))
+
+plt.scatter(x, y, color='b')
+plt.plot(x, model.predict(x), color='r')
+plt.plot([24, 29], [345.4, 348.4], color='g')
+plt.show()
