@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
+import numpy as np
 
 def txt_to_csv():
     data_dict = {'temp': [], 'speed':[]}
@@ -37,7 +38,7 @@ print("편향(절편 파라미터 b) :", model.intercept_)
 print(model.score(x_train, y_train))
 print(model.score(x_test, y_test))
 
-import numpy as np
+plt.scatter(x, y, color='black')
 
 def remove_outliers(x, y, model, threshold):
     y_pred = model.predict(x)
@@ -58,10 +59,11 @@ model.fit(x_train, y_train)
 outlier_threshold = 10
 
 x_train_filtered, y_train_filtered = remove_outliers(x_train, y_train, model, outlier_threshold)
+x_filtered, y_filtered = remove_outliers(x, y, model, outlier_threshold)
 
 model.fit(x_train_filtered, y_train_filtered)
 
-plt.scatter(x_train_filtered, y_train_filtered, color='b')
+plt.scatter(x_filtered, y_filtered, color='b')
 plt.plot(x, model.predict(x), color='r')
 
 plt.xlim(24,29)
